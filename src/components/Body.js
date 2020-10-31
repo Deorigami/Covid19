@@ -1,28 +1,71 @@
 import React, { useContext } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import { GlobalContext } from "../GlobalContext";
 
 export default function Body() {
-  const covData = useContext(GlobalContext);
+  const [covData, countryList, setCountry] = useContext(GlobalContext);
+  const [query, setQuery] = useState("");
+  console.log(covData, countryList);
+
+  const onChange = (e) => {
+    setQuery(e.target.value);
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    setCountry(query);
+
+    setQuery("");
+  };
   return (
     <Container>
       <header>
-        <h2>Covid-19 </h2>
-        <h2>Global Trend</h2>
+        <h2 style={{ color: "rgb(98, 54, 255)" }}>Covid-19 </h2>
+        <h2 style={{ marginLeft: "10px", fontWeight: 300 }}>Global Trend</h2>
       </header>
 
       <div className="cases">
-        <div className="aggregated">aggregated</div>
-        <div className="active">active</div>
-        <div className="recovered">recovered</div>
-        <div className="death">death</div>
+        <div className="aggregated">
+          <header>Aggregated Confirmed</header>
+          <main>{covData.today_confirmed}</main>
+          <p>23%</p>
+        </div>
+        <div className="active">
+          <header>Active Confirmed</header>
+          <main>
+            {covData.today_confirmed -
+              covData.today_recovered -
+              covData.today_deaths}
+          </main>
+          <p>23%</p>
+        </div>
+        <div className="recovered">
+          <header>Recovered</header>
+          <main>{covData.today_recovered}</main>
+          <p>23%</p>
+        </div>
+        <div className="death">
+          <header>Death</header>
+          <main>{covData.today_deaths}</main>
+          <p>23%</p>
+        </div>
       </div>
 
       <div className="statistic">
         <div className="city">
           <div className="inputLogo">
-            <input type="text" />
+            <form action="" onSubmit={onSubmit}>
+              <input
+                type="text"
+                placeholder="Search Country"
+                onChange={onChange}
+                value={query}
+              />
+            </form>
           </div>
+
           <div className="nationCases"></div>
         </div>
         <div className="visualisasi">
@@ -58,15 +101,46 @@ const Container = styled.div`
     .aggregated,
     .recovered,
     .death {
-      border: 1px solid;
       display: flex;
       height: 75%;
       width: 23%;
       background: white;
-      border-radius: 2vw;
-      flex-direction: row;
-      justify-content: space-around;
+      border-radius: 1.5vw;
+      flex-direction: column;
+      justify-content: center;
       align-items: center;
+
+      header {
+        width: 100%;
+        height: 20%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      main {
+        font-size: 2vw;
+      }
+
+      p {
+        font-size: 0.8vw;
+      }
+    }
+
+    .aggregated main {
+      color: rgb(253, 102, 132);
+    }
+
+    .active main {
+      color: rgb(255, 155, 88);
+    }
+
+    .recovered main {
+      color: rgb(157, 227, 82);
+    }
+
+    .death main {
+      color: rgb(149, 117, 255);
     }
   }
 
@@ -95,6 +169,9 @@ const Container = styled.div`
         input {
           border: none;
           background: none;
+          outline: none;
+          width: 100%;
+          padding-left: 10px;
         }
 
         ::before {
