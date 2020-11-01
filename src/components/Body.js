@@ -4,9 +4,11 @@ import styled from "styled-components";
 import { GlobalContext } from "../GlobalContext";
 
 export default function Body() {
-  const [covData, countryList, setCountry] = useContext(GlobalContext);
+  const setCountry = useContext(GlobalContext)[2];
+  const cases = useContext(GlobalContext)[3];
   const [query, setQuery] = useState("");
-  console.log(covData, countryList);
+
+  console.log(useContext(GlobalContext), cases);
 
   const onChange = (e) => {
     setQuery(e.target.value);
@@ -29,26 +31,22 @@ export default function Body() {
       <div className="cases">
         <div className="aggregated">
           <header>Aggregated Confirmed</header>
-          <main>{covData.today_confirmed}</main>
+          <main>{cases.confirmed}</main>
           <p>23%</p>
         </div>
         <div className="active">
           <header>Active Confirmed</header>
-          <main>
-            {covData.today_confirmed -
-              covData.today_recovered -
-              covData.today_deaths}
-          </main>
+          <main>{cases.active}</main>
           <p>23%</p>
         </div>
         <div className="recovered">
           <header>Recovered</header>
-          <main>{covData.today_recovered}</main>
+          <main>{cases.recovered}</main>
           <p>23%</p>
         </div>
         <div className="death">
           <header>Death</header>
-          <main>{covData.today_deaths}</main>
+          <main>{cases.deaths}</main>
           <p>23%</p>
         </div>
       </div>
@@ -109,7 +107,7 @@ const Container = styled.div`
       flex-direction: column;
       justify-content: center;
       align-items: center;
-
+      transition: 1s ease-in;
       header {
         width: 100%;
         height: 20%;
