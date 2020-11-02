@@ -3,8 +3,8 @@ import React, { useState, useEffect, createContext } from "react";
 export const GlobalContext = createContext();
 
 export const ContextProvider = (props) => {
-  const [apiData, setApiData] = useState({});
-  const [countryList, setCountryList] = useState([]);
+  const [apiData, setApiData] = useState({}); // First Api Data
+  const [countryList, setCountryList] = useState([]); // This is the global Data of Covid 19
   const [country, setCountry] = useState("Indonesia");
   const [fullData, setFullData] = useState({
     confirmed: "",
@@ -33,7 +33,7 @@ export const ContextProvider = (props) => {
       )
         .then((res) => {
           if (res.ok === false) {
-            throw Error(res.ok);
+            throw new Error();
           }
           setError(res.ok);
           return res.json();
@@ -55,22 +55,32 @@ export const ContextProvider = (props) => {
           }));
           return data.dates;
         })
-        .catch((err) => setError(err));
+        .catch((err) => {
+          setError(false);
+        });
 
-      await setApiData(
-        Object.entries(Object.entries(covData)[0][1].countries)[0][1]
-      );
+      covData &&
+        (await setApiData(
+          Object.entries(Object.entries(covData)[0][1].countries)[0][1]
+        ));
     };
 
-    const countryNames = async () => {
-      const fetchCountry = await fetch(
-        "https://restcountries.eu/rest/v2/all"
-      ).then((res) => res.json());
+    (async function () {
+      await fetch(`https://api.covid19tracking.narrativa.com/api/${fullDate}`)
+        .then((res) => {
+          if (res.ok) {
+            return res.json();
+          } else throw Error("Error Brow");
+        })
+        .then((data) => {
+          const GlobalData = Object.entries(
+            Object.entries(data.dates[`2020-11-01`])[0][1]
+          );
+          setCountryList(GlobalData);
+        });
+    })();
 
-      setCountryList(fetchCountry);
-    };
     fetchData();
-    countryNames();
   }, [country, fullDate]);
 
   return (

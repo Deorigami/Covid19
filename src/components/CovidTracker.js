@@ -18,6 +18,6 @@ export default CovidTracker;
 
 const Container = styled.div`
   width: 80%;
-  height: 80%;
+  height: 90%;
   display: flex;
 `;

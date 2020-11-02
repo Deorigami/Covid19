@@ -2,13 +2,15 @@ import React, { useContext } from "react";
 import { useState } from "react";
 import styled from "styled-components";
 import { GlobalContext } from "../GlobalContext";
+import MapVisual from "./MapVisual";
 
 export default function Body() {
   const setCountry = useContext(GlobalContext)[2];
   const cases = useContext(GlobalContext)[3];
+  const countries = useContext(GlobalContext)[1];
   const [query, setQuery] = useState("");
 
-  console.log(useContext(GlobalContext), cases);
+  console.log(useContext(GlobalContext));
 
   const onChange = (e) => {
     setQuery(e.target.value);
@@ -21,6 +23,7 @@ export default function Body() {
 
     setQuery("");
   };
+
   return (
     <Container>
       <header>
@@ -63,11 +66,19 @@ export default function Body() {
               />
             </form>
           </div>
-
-          <div className="nationCases"></div>
+          <div className="listCity">
+            <ul>
+              {countries.map((data, index) => (
+                <div className="Lists" key={index}>
+                  <p>{data[1].today_confirmed}</p>
+                  <li>{data[1].name}</li>
+                </div>
+              ))}
+            </ul>
+          </div>
         </div>
         <div className="visualisasi">
-          <div className="map"></div>
+          <MapVisual />
           <div className="diagram"></div>
         </div>
       </div>
@@ -146,21 +157,22 @@ const Container = styled.div`
     height: 65%;
     width: 100%;
     background: white;
-    border: solid black;
     display: flex;
     border-radius: 1vw;
     padding: 1.3vw;
 
     .city {
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
+      width: 30%;
+      height: 100%;
 
       .inputLogo {
         display: flex;
         align-items: center;
         border-radius: 50px;
         width: 95%;
-        height: 9%;
+        height: 10%;
         background: rgb(0, 0, 0, 0.1);
         padding-left: 10px;
 
@@ -178,6 +190,42 @@ const Container = styled.div`
           content: "\f002";
         }
       }
+
+      .listCity {
+        overflow-y: scroll;
+        padding: 0 1vw 0 1vw;
+        height: 80%;
+        margin-top: 10%;
+
+        ul {
+          font-size: 1vw;
+          height: 100%;
+
+          .Lists {
+            display: flex;
+            text-align: left;
+            letter-spacing: 0.8px;
+            margin-top: 1vh;
+            p {
+              min-width: 4vw;
+            }
+
+            li {
+              list-style: none;
+              padding-left: 1vw;
+              color: rgb(0, 0, 0, 0.5);
+            }
+          }
+        }
+      }
+    }
+
+    .visualisasi {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+      padding-left: 10px;
     }
   }
 `;
