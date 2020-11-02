@@ -5,9 +5,9 @@ import { GlobalContext } from "../GlobalContext";
 import MapVisual from "./MapVisual";
 
 export default function Body() {
-  const setCountry = useContext(GlobalContext)[2];
-  const cases = useContext(GlobalContext)[3];
-  const countries = useContext(GlobalContext)[1];
+  const setCountry = useContext(GlobalContext)[1];
+  const cases = useContext(GlobalContext)[2];
+  const countries = useContext(GlobalContext)[0];
   const [query, setQuery] = useState("");
 
   console.log(useContext(GlobalContext));
