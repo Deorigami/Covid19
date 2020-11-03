@@ -7,7 +7,7 @@ function MapVisual() {
     <Container>
       <MapContainer
         center={[-8.219233, 114.369225]}
-        zoom={1}
+        zoom={3}
         scrollWheelZoom={true}
       >
         <TileLayer
@@ -38,5 +38,9 @@ const Container = styled.div`
   }
 
   &:hover {
+  }
+
+  @media (max-width: 768px) {
+    height: 100%;
   }
 `;

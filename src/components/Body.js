@@ -107,16 +107,19 @@ const Container = styled.div`
 
   .cases {
     width: 100%;
-    height: 20%;
+    height: 18%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+
+    
 
     .active,
     .aggregated,
     .recovered,
     .death {
       display: flex;
-      height: 75%;
+      height: 100%;
       width: 23%;
       background: white;
       border-radius: 1.5vw;
@@ -166,20 +169,27 @@ const Container = styled.div`
     }
 
     @media (max-width: 768px) {
+      
+
       .active,
       .aggregated,
       .recovered,
       .death {
+        padding:0.5rem;
+
+
+
         header {
+          
           width: 100%;
-          height: 20%;
+          height: 30%;
           display: flex;
           justify-content: center;
           align-items: center;
-          font-size: 4.5vw;
+          font-size: 1.1rem;
         }
         main {
-          font-size: 3vw;
+          font-size: 0.7rem;
           width: 100%;
           height: 30%;
           display: flex;
@@ -206,7 +216,7 @@ const Container = styled.div`
     .city {
       display: flex;
       flex-direction: column;
-      width: 30%;
+      width: 45%;
       height: 100%;
 
       .inputLogo {
@@ -216,20 +226,28 @@ const Container = styled.div`
         width: 95%;
         height: 10%;
         background: rgb(0, 0, 0, 0.1);
-        padding-left: 10px;
+        padding-left: 0.5rem;
+        
+
+        form{
+          height: 100%;
+
+        }
 
         input {
           border: none;
           background: none;
           outline: none;
           width: 100%;
-          padding-left: 10px;
+          padding-left: 0.5vw;
+          height: 100%;
         }
 
         ::before {
           font-family: "Font Awesome 5 Free";
           font-weight: 900;
           content: "\f002";
+          font-size: 1rem;
         }
       }
 
@@ -260,6 +278,56 @@ const Container = styled.div`
           }
         }
       }
+
+      @media (max-width: 768px) {
+        .inputLogo {
+          
+          
+          
+          padding-left: 5px;
+
+          ::before {
+            font-size: 0.8rem;
+          }
+          }
+
+          form {
+           
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+          
+          input {
+            
+            width: 100%;
+            font-size: 0.6rem;   
+            
+                   
+            
+            
+            
+
+          }
+
+          
+        }
+
+        .listCity {
+
+          ul{
+            font-size : 0.7rem;
+            letter-spacing: 0.3px;
+            
+
+            .Lists {
+              p{
+                min-width : 2.7rem;
+              }
+            }
+          }
+        }
+      }
     }
 
     .visualisasi {
@@ -268,6 +336,14 @@ const Container = styled.div`
       width: 100%;
       height: 100%;
       padding-left: 10px;
+
+      @media (max-width: 768px){
+        flex-direction: row;
+
+        .diagram {
+          display: none;
+        }
+      }
     }
   }
 `;
