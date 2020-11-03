@@ -9,4 +9,9 @@ const Container = styled.div`
   width: 25%;
   height: 100%;
   background: lightblue;
+
+  @media (max-width: 786px) {
+    width: 100%;
+    height: 30%;
+  }
 `;

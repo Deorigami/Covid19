@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { useState } from "react";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import { GlobalContext } from "../GlobalContext";
 import MapVisual from "./MapVisual";
 
@@ -33,12 +33,12 @@ export default function Body() {
 
       <div className="cases">
         <div className="aggregated">
-          <header>Aggregated Confirmed</header>
+          <header>Aggregated</header>
           <main>{cases.confirmed}</main>
           <p>23%</p>
         </div>
         <div className="active">
-          <header>Active Confirmed</header>
+          <header>Active</header>
           <main>{cases.active}</main>
           <p>23%</p>
         </div>
@@ -90,8 +90,13 @@ const Container = styled.div`
   width: 65%;
   height: 100%;
   padding-left: 2vw;
+  padding-right: 2vw;
   background: rgb(243, 252, 255);
 
+  @media (max-width: 786px) {
+    width: 100%;
+    height: 60%;
+  }
   header {
     width: 100%;
     height: 10%;
@@ -119,20 +124,28 @@ const Container = styled.div`
       justify-content: center;
       align-items: center;
       transition: 1s ease-in;
+
       header {
         width: 100%;
         height: 20%;
         display: flex;
         justify-content: center;
         align-items: center;
-      }
-
-      main {
         font-size: 2vw;
       }
 
+      main {
+        font-size: 1.5vw;
+        width: 100%;
+        height: 30%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 0.7vw;
+      }
+
       p {
-        font-size: 0.8vw;
+        font-size: 1vw;
       }
     }
 
@@ -150,6 +163,35 @@ const Container = styled.div`
 
     .death main {
       color: rgb(149, 117, 255);
+    }
+
+    @media (max-width: 768px) {
+      .active,
+      .aggregated,
+      .recovered,
+      .death {
+        header {
+          width: 100%;
+          height: 20%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 4.5vw;
+        }
+        main {
+          font-size: 3vw;
+          width: 100%;
+          height: 30%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-top: 1vw;
+        }
+
+        p {
+          font-size: 2vw;
+        }
+      }
     }
   }
 

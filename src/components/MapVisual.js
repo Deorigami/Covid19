@@ -29,4 +29,14 @@ export default MapVisual;
 const Container = styled.div`
   width: 100%;
   height: 50%;
+  transition: 0.5s ease-in;
+
+  .leaflet-container {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+  }
+
+  &:hover {
+  }
 `;
