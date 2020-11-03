@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { useState } from "react";
 import styled from "styled-components/macro";
 import { GlobalContext } from "../GlobalContext";
+import Diagram from "./Diagram";
 import MapVisual from "./MapVisual";
 
 export default function Body() {
@@ -79,7 +80,7 @@ export default function Body() {
         </div>
         <div className="visualisasi">
           <MapVisual />
-          <div className="diagram"></div>
+          <Diagram />
         </div>
       </div>
     </Container>
@@ -111,8 +112,6 @@ const Container = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    
 
     .active,
     .aggregated,
@@ -169,18 +168,13 @@ const Container = styled.div`
     }
 
     @media (max-width: 768px) {
-      
-
       .active,
       .aggregated,
       .recovered,
       .death {
-        padding:0.5rem;
-
-
+        padding: 0.5rem;
 
         header {
-          
           width: 100%;
           height: 30%;
           display: flex;
@@ -227,11 +221,9 @@ const Container = styled.div`
         height: 10%;
         background: rgb(0, 0, 0, 0.1);
         padding-left: 0.5rem;
-        
 
-        form{
+        form {
           height: 100%;
-
         }
 
         input {
@@ -281,68 +273,52 @@ const Container = styled.div`
 
       @media (max-width: 768px) {
         .inputLogo {
-          
-          
-          
           padding-left: 5px;
 
           ::before {
             font-size: 0.8rem;
           }
-          }
-
-          form {
-           
-            display: flex;
-            justify-content: center;
-            align-items: center;
-          }
-          
-          input {
-            
-            width: 100%;
-            font-size: 0.6rem;   
-            
-                   
-            
-            
-            
-
-          }
-
-          
         }
 
-        .listCity {
+        form {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
 
-          ul{
-            font-size : 0.7rem;
-            letter-spacing: 0.3px;
-            
+        input {
+          width: 100%;
+          font-size: 0.6rem;
+        }
+      }
 
-            .Lists {
-              p{
-                min-width : 2.7rem;
-              }
+      .listCity {
+        ul {
+          font-size: 0.7rem;
+          letter-spacing: 0.3px;
+
+          .Lists {
+            p {
+              min-width: 2.7rem;
             }
           }
         }
       }
     }
+  }
 
-    .visualisasi {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      height: 100%;
-      padding-left: 10px;
+  .visualisasi {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    padding-left: 10px;
 
-      @media (max-width: 768px){
-        flex-direction: row;
+    @media (max-width: 768px) {
+      flex-direction: row;
 
-        .diagram {
-          display: none;
-        }
+      .diagram {
+        display: none;
       }
     }
   }
